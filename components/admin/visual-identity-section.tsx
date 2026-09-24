@@ -14,7 +14,7 @@ export function VisualIdentitySection() {
   const text = visualIdentityText[lang];
   const [settings, setSettings] = useState<VisualIdentitySettings | null>(null);
   const [loading, setLoading] = useState(true);
-  const [notice, setNotice] = useState<'loadError' | 'ownerPending' | 'ownerOnly' | null>(null);
+  const [notice, setNotice] = useState<'loadError' | 'migrationRequired' | 'ownerPending' | 'ownerOnly' | null>(null);
   const request = useRef(0);
   const load = useCallback(async () => {
     const version = ++request.current;
@@ -28,8 +28,10 @@ export function VisualIdentitySection() {
       const row = data as VisualIdentitySettings | null;
       setSettings(row);
       setNotice(!row?.owner_user_id ? 'ownerPending' : row.owner_user_id !== session?.user.id ? 'ownerOnly' : null);
-    } catch {
-      if (version === request.current) setNotice('loadError');
+    } catch (cause) {
+      if (version !== request.current) return;
+      const code = cause && typeof cause === 'object' && 'code' in cause ? cause.code : undefined;
+      setNotice(code === 'PGRST205' || code === '42P01' ? 'migrationRequired' : 'loadError');
     } finally {
       if (version === request.current) setLoading(false);
     }

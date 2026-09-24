@@ -62,6 +62,13 @@ WHERE id = true;
 
 من دون ذلك، عمليات رفع الصور تُرفض.
 
+> ملاحظة مهمة للنشر على Vercel: Vercel ينشر تطبيق Next.js فقط ولا يشغّل ملفات
+> `supabase/migrations/` تلقائياً. بعد كل نشر لمشروع Supabase جديد، افتح SQL Editor
+> والصق ملف `20260917123000_add_visual_identity.sql` كاملاً وشغّله، ثم عيّن
+> `owner_user_id` كما في المثال أعلاه. إذا ظهرت رسالة أن إعداد Visual Identity
+> مفقود في لوحة الإدارة، فهذا يعني أن هذه الخطوة لم تُنفّذ على مشروع Supabase
+> المرتبط بمتغيرات البيئة في Vercel.
+
 ### 3. مصادقة الاستعادة (Reset Password)
 
 يعتمد المشروع على Supabase Auth:
@@ -266,4 +273,3 @@ pnpm dev      # أو pnpm start للتجربة على build
   npm install -g pnpm
   ```
 - **حساب Supabase** مع مشروع يحتوي على الجداول والسياسات والـ bucket المطلوبة.
-

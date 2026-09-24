@@ -3,8 +3,7 @@ import type { Language } from './i18n';
 export const VISUAL_IDENTITY_BUCKET = 'visual-identity';
 export const MAX_IMAGE_BYTES = 2 * 1024 * 1024;
 
-export const visualIdentityFields = [
-  { key: 'hero_background_path', en: 'Hero Background', ar: 'خلفية القسم الرئيسي', width: 1920, height: 1080, formats: 'JPG / WebP', extensions: ['jpg', 'jpeg', 'webp'] },
+export const visualIdentityFields = [ { key: 'hero_background_path', en: 'Hero Background', ar: 'خلفية القسم الرئيسي', width: 1920, height: 1080, formats: 'JPG / WebP', extensions: ['jpg', 'jpeg', 'webp'] },
   { key: 'portfolio_logo_path', en: 'Portfolio Logo', ar: 'شعار البورتفوليو', width: 96, height: 96, formats: 'PNG / SVG', extensions: ['png', 'svg'] },
   { key: 'brand_mark_path', en: 'Brand Mark', ar: 'العلامة البصرية', width: 192, height: 192, formats: 'PNG / SVG', extensions: ['png', 'svg'] },
   { key: 'favicon_path', en: 'Favicon', ar: 'أيقونة المتصفح', width: 32, height: 32, formats: 'ICO / PNG', extensions: ['ico', 'png'] },
@@ -36,7 +35,8 @@ export const visualIdentityText = {
     invalid: 'Invalid or unsupported image. Use one of the listed formats.',
     tooLarge: 'The image must be non-empty and no larger than 2 MB.',
     unsafeSvg: 'Use a self-contained SVG with basic shapes, paths and gradients only; scripts, styles and external references are not supported.',
-    loadError: 'Visual Identity settings could not be read. Check the connection, and apply migration 20260917123000_add_visual_identity.sql if it has not been deployed yet.',
+    loadError: 'Visual Identity settings could not be read. Check the connection and try again.',
+    migrationRequired: 'The Visual Identity database setup is missing. Run migration 20260917123000_add_visual_identity.sql in the Supabase SQL Editor, then retry.',
     ownerOnly: 'Only the assigned portfolio owner can manage these images.',
     ownerPending: 'The form is ready, but uploads stay locked until the admin account is assigned as owner. In the Supabase SQL Editor run: update public.visual_identity_settings set owner_user_id = \'<admin auth.users id>\' where id = true;',
     retry: 'Retry',
@@ -64,7 +64,8 @@ export const visualIdentityText = {
     invalid: 'الصورة غير صالحة أو غير مدعومة. استخدم إحدى الصيغ المذكورة.',
     tooLarge: 'يجب ألا تكون الصورة فارغة وألا يتجاوز حجمها 2 ميجابايت.',
     unsafeSvg: 'استخدم SVG مستقلاً يحتوي على أشكال ومسارات وتدرجات أساسية فقط؛ السكربتات والأنماط والمراجع الخارجية غير مدعومة.',
-    loadError: 'تعذر قراءة إعدادات الهوية البصرية. تحقق من الاتصال، وطبّق Migration ‏20260917123000_add_visual_identity.sql إذا لم تُطبّق بعد.',
+    loadError: 'تعذر قراءة إعدادات الهوية البصرية. تحقق من الاتصال ثم حاول مرة أخرى.',
+    migrationRequired: 'إعداد قاعدة بيانات الهوية البصرية غير موجود. نفّذ Migration ‏20260917123000_add_visual_identity.sql في SQL Editor داخل Supabase ثم أعد المحاولة.',
     ownerOnly: 'يمكن لمالك البورتفوليو المُعيَّن فقط إدارة هذه الصور.',
     ownerPending: 'النموذج جاهز، لكن الرفع مغلق حتى تعيين حساب الأدمن كمالك. نفّذ في SQL Editor داخل Supabase: update public.visual_identity_settings set owner_user_id = \'<معرّف حساب الأدمن في auth.users>\' where id = true;',
     retry: 'إعادة المحاولة',
